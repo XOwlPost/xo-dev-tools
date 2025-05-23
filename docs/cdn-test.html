@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>XO Dev Tools — CDN Preview</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #0f0;
+      font-family: monospace;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h3 style="padding: 10px;">🧪 XO Dev Tools Test</h3>
+  <p style="padding: 10px;">This page loads the bundled devtools from CDN. The overlay UI should appear automatically.</p>
+
+  <!-- Use GitHub Pages CDN path -->
+  <script src="./xo-dev-tools.umd.js"></script>
+  <script>
+    // 🧪 Optional mock simulation
+    window.XO_DEV_INIT = () => {
+      console.log('🧪 Simulating agent feedback...');
+      setTimeout(() => console.log('💡 Agent1: "Suggesting next mission..."'), 1000);
+      setTimeout(() => console.log('⚙️ Agent2: "Running system diagnostics"'), 2000);
+      setTimeout(() => console.log('✅ All systems nominal.'), 3000);
+    };
+
+    // Auto-initialize when bundle loads
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.XODevTools && typeof window.XODevTools.initDevTools === 'function') {
+        window.XODevTools.initDevTools();
+        console.log('✅ XODevTools initialized from CDN');
+      } else {
+        console.warn('⚠️ XODevTools not found in global scope');
+      }
+    });
+  </script>
+</body>
+</html>
+
